@@ -1,0 +1,49 @@
+train:
+  num_epochs: 80
+  k: 5
+  output_dir: results/
+  early_stopping:
+    patience: 30
+    min_delta: 0.0
+  val_every: 1
+  mifid_feature_size: 64
+  loss_type: wgan
+  monitor_metric: loss
+  gp_weight: 20.0
+
+dataset:
+  data_dir: data/
+  input_channels: 3
+  batch_size: 8
+  pin_memory: False
+  dataset_num_workers: 2
+  test_size: 0.20
+  seed: 42
+  use_big_dataset: False
+  shuffle: True
+  fraction_dataset: 0.2
+
+optimization:
+  generator:
+    identity_loss_weight: 3.0
+    cycle_loss_weight: 5.0
+    gan_loss_weight: 1.0
+    scheduler_type: cosine
+    lr: 0.0001
+    b1: 0.5
+    b2: 0.999
+  discriminator:
+    scheduler_type: cosine
+    lr: 0.0001
+    b1: 0.5
+    b2: 0.999
+
+model:
+  input_channels: 3
+  channels: 4
+  n_res_blocks: 1
+  n_scale_blocks: 1
+  discriminator_type: patchgan
+  image_size: 256
+
+device: cpu
