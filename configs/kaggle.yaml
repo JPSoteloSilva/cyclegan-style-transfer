@@ -1,0 +1,49 @@
+train:
+  num_epochs: 100
+  k: 3
+  output_dir: /kaggle/working/
+  early_stopping:
+    patience: 30
+    min_delta: 0.0
+  val_every: 5
+  mifid_feature_size: 64
+  loss_type: mse
+  monitor_metric: loss
+  gp_weight: 10.0
+
+dataset:
+  data_dir: /kaggle/input/gan-getting-started
+  input_channels: 3
+  batch_size: 8
+  pin_memory: False
+  dataset_num_workers: 2
+  test_size: 0.15
+  seed: 42
+  use_big_dataset: False
+  shuffle: True
+  fraction_dataset: 1.0
+
+optimization:
+  generator:
+    identity_loss_weight: 5.0
+    cycle_loss_weight: 10.0
+    gan_loss_weight: 5.0
+    scheduler_type: cosine
+    lr: 0.0002
+    b1: 0.5
+    b2: 0.999
+  discriminator:
+    scheduler_type: cosine
+    lr: 0.0001
+    b1: 0.5
+    b2: 0.999
+
+model:
+  input_channels: 3
+  channels: 64
+  n_res_blocks: 6
+  n_scale_blocks: 3
+  discriminator_type: patchgan
+  image_size: 256
+
+device: cuda
