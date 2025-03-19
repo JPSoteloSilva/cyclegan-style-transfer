@@ -1,0 +1,57 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "gan-style-transfer"
+version = "0.1.0"
+description = "Style transfer using CycleGANs for the course of GANs"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "Juan Pablo Sotelo", email = "jpsotelosilva@gmail.com" }
+]
+
+dependencies = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "pillow>=9.0.0",
+    "numpy>=1.22.0",
+    "tqdm>=4.62.0",
+    "torchmetrics[image]>=0.11.0",
+    "pydantic>=2.0.0",
+    "PyYAML>=6.0",
+    "matplotlib>=3.9.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "isort>=5.10.0",
+    "mypy>=1.0.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.black]
+line-length = 88
+target-version = ["py39"]
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[project.scripts]
+train = "src.train:main"
+predict = "src.predict:main" 
